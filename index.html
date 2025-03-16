@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday! 🎉</title>
+    <style>
+        /* สไตล์เค้กตก */
+        .cake-fall {
+            position: fixed;
+            top: -50px;
+            font-size: 30px;
+            z-index: 9999;
+            pointer-events: none;
+            animation: cakeFall 5s linear infinite;
+        }
+
+        @keyframes cakeFall {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) translateX(50px) rotate(360deg);
+                opacity: 0.3;
+            }
+        }
+
+        /* สไตล์หลัก */
+        body {
+            font-family: 'Comic Sans MS', cursive;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            text-align: center;
+            padding: 20px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            color: #ff69b4;
+            font-size: 2.8em;
+            text-shadow: 2px 2px 0px #fff;
+            animation: bounce 1s infinite;
+            margin: 15px 0;
+        }
+
+        .balloon {
+            font-size: 50px;
+            margin: 10px;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .message {
+            font-size: 1.3em;
+            color: #666;
+            margin: 25px 0;
+            padding: 20px;
+            border: 3px dotted #ff69b4;
+            border-radius: 15px;
+            line-height: 1.6;
+        }
+
+        button {
+            background: #ff69b4;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 15px 0;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background: #ff1493;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+        }
+
+        #video-surprise {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 15px;
+            margin: 20px auto;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            display: none;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-25px) rotate(5deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .hearts {
+            font-size: 40px;
+            margin: 10px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="balloon">🎈</div>
+        <div class="balloon">🎈</div>
+        <div class="balloon">🎈</div>
+        
+        <h1>Happy Birthday! 🎂</h1>
+        
+        <div class="message">
+            🎂 แฮปปี้เบิร์ธเดย์นะ โมบายสุดที่รัก! วันนี้วันเกิดหนูใช่ไหม? 🎂<br>
+            🎂 มีอะไรให้น้าเฟย์มั้ย555555 🎂<br>
+            🎂 ขอให้เรียนเก่ง ๆ โตมาสวย รวย และฉลาด ขอให้ได้ของขวัญเยอะ ๆ..🎂<br>
+            🎂 แล้วแบ่งมาทางนี้ด้วยนะ 🎂
+        </div>
+
+        <button onclick="showVideo()">กดดูของขวัญเร็วๆๆ🤣 🎬</button>
+        
+        <video id="video-surprise" controls muted playsinline>
+            <source src="css/1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <div class="hearts">
+            💝🎀💌
+        </div>
+    </div>
+
+    <script>
+        // สร้างเอฟเฟกต์เค้กตก
+        function createCake() {
+            const cake = document.createElement('div');
+            cake.className = 'cake-fall';
+            cake.innerHTML = '🎂';
+            
+            // สุ่มตำแหน่งเริ่มต้น
+            cake.style.left = Math.random() * 100 + '%';
+            
+            // สุ่มความเร็วและขนาด
+            const speed = 5 + Math.random() * 10;
+            const size = 20 + Math.random() * 30;
+            cake.style.fontSize = size + 'px';
+            cake.style.animationDuration = speed + 's';
+            
+            // สุ่มสีสัน
+            const colors = ['#ff69b4', '#ff9a9e', '#ffd700', '#ff6347'];
+            cake.style.textShadow = `0 0 10px ${colors[Math.floor(Math.random() * colors.length)]}`;
+            
+            document.body.appendChild(cake);
+            
+            // ลบเค้กเมื่อ animation จบ
+            cake.addEventListener('animationend', () => {
+                cake.remove();
+            });
+        }
+
+        // เริ่มสร้างเค้กทุกๆ 0.3 วินาที
+        setInterval(createCake, 500);
+
+        // ฟังก์ชันแสดงวิดีโอ
+        function showVideo() {
+            const video = document.getElementById('video-surprise');
+            const button = document.querySelector('button');
+            
+            video.src = "css/1.mp4";
+            video.load();
+            
+            video.style.display = 'block';
+            
+            video.play().then(() => {
+                button.innerHTML = "ดีใจใช่มั้ย🤣🤣🤣 🎉";
+            }).catch(error => {
+                button.innerHTML = "กดอีกทีเพื่อเล่น ▶️";
+            });
+            
+            button.style.background = '#ff1493';
+            button.style.transform = 'scale(1.05)';
+        }
+    </script>
+</body>
+</html>
